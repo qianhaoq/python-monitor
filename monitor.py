@@ -1,13 +1,16 @@
 #!/usr/bin/python3
+import os
 import urllib.request
 import gzip
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
+# 伪装User-Agent
 header = {}
 header['User-Agent'] = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36"
 
+# 设定监控的url
 url1 = "http://www.yamibuy.com/cn/goods.php?id=166453"
 id1 = 166453
 
@@ -21,6 +24,11 @@ item_list[id2] = url2
 info_list = {}
 info_list[id1] = "好欢螺 螺蛳粉 400g 到货啦！ "
 info_list[id2] = "好欢螺 螺蛳粉 300g 到货啦！ "
+
+# 获取当前目录
+path = os.getcwd()
+# 设定锁目录
+filename = path + '//' + 'lock.txt'
 
 def senderMail(idx):
     """
@@ -52,10 +60,14 @@ def listen_url(url, idx):
     except:
         html = data.decode("utf-8")
     if html.find('已售完') < 0:
+        f = open(filename, 'w')
+        f.close()
         senderMail(idx)
 
 
 
+if os.path.exists(filename):
+    exit()
 listen_url(url1, id1)
 listen_url(url2, id2)
 # print(listen_url(url2))
