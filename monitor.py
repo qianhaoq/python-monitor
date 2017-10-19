@@ -51,7 +51,7 @@ def listen_url(url, idx):
         html = gzip.decompress(data).decode("utf-8")
     except:
         html = data.decode("utf-8")
-    if html.find('已售完') > 0:
+    if html.find('已售完') < 0:
         senderMail(idx)
 
 
