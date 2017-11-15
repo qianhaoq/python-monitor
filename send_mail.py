@@ -31,7 +31,7 @@ def senderMail():
     #         + queue_msg + ' 的数据失败\n'\
     #         + '重启脚本位于cp01-guarantee-offline.epc.baidu.com机器，重启操作为 cd /home/work/chengxin/industry/tools/salerules/hql/\
     #         && sh getPvDataByHql.sh '+ queue_msg + '\n 历史抓取数据如下:\n' + his_list, 'plain', 'utf-8')
-    message['Subject'] = '好欢螺到货通知！'
+    message['Subject'] = 'this is a test email'
     message['From'] = sender
     #receiver_list = ';'.join(receivers)
     message['To'] =  receivers[0]
