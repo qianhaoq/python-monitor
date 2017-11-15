@@ -38,7 +38,7 @@ def senderMail(idx):
     receivers = ['qianhaoq@126.com']
     message = MIMEText(info_list[idx] + "\n购买地址为: " + item_list[idx], 'plain', 'utf-8')
 
-    message['Subject'] = '好欢螺到货通知！'
+    message['Subject'] = '测试邮件--好欢螺并没有到货通知！'
     message['From'] = sender
     #receiver_list = ';'.join(receivers)
     message['To'] =  receivers[0]
@@ -59,7 +59,7 @@ def listen_url(url, idx):
         html = gzip.decompress(data).decode("utf-8")
     except:
         html = data.decode("utf-8")
-    if html.find('已售完') < 0:
+    if html.find('已售完') >= 0:
         f = open(filename, 'w')
         f.close()
         senderMail(idx)
